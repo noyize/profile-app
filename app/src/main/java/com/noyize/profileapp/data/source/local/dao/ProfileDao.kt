@@ -18,4 +18,7 @@ interface ProfileDao {
     @Query("SELECT * FROM profile_table WHERE id=:profileId")
     fun getProfileDetails(profileId: Int): Flow<ProfileDetailEntity>
 
+    @Query("SELECT * FROM profile_table")
+    fun getProfiles() : Flow<List<ProfileEntity>>
+
 }

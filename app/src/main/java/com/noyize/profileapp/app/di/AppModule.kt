@@ -1,6 +1,8 @@
 package com.noyize.profileapp.app.di
 
 import android.app.Application
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.noyize.profileapp.data.source.local.ProfileAppDatabase
 import dagger.Module
@@ -25,5 +27,8 @@ class AppModule {
     @Singleton
     fun provideCategoryDao(db: ProfileAppDatabase) = db.profileDao
 
-
+    @Provides
+    @Singleton
+    fun provideSharedPreference(application: Application): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(application)
 }
