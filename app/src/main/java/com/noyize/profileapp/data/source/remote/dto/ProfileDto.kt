@@ -17,7 +17,7 @@ data class ProfileDto(
     @Json(name = "name")
     val name: String?,
     @Json(name = "phone")
-    val phone: Any?,
+    val phone: String?,
     @Json(name = "profile_image")
     val profileImage: String?,
     @Json(name = "username")
