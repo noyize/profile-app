@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
-    id 'com.google.devtools.ksp' version '1.6.10-1.0.2'
+    id 'com.google.devtools.ksp' version '1.6.21-1.0.6'
 }
 
 android {
@@ -73,8 +73,8 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
     // Compose Nav Destinations
-    implementation 'io.github.raamcosta.compose-destinations:animations-core:1.5.7-beta'
-    ksp 'io.github.raamcosta.compose-destinations:ksp:1.5.7-beta'
+    implementation 'io.github.raamcosta.compose-destinations:animations-core:1.6.12-beta'
+    ksp 'io.github.raamcosta.compose-destinations:ksp:1.6.12-beta'
 
     // Room
     implementation "androidx.room:room-ktx:2.4.2"
