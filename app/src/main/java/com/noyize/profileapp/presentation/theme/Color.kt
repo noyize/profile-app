@@ -1,4 +1,4 @@
-package com.noyize.profileapp.ui.theme
+package com.noyize.profileapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

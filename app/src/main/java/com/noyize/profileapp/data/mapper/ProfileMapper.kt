@@ -10,10 +10,10 @@ fun ProfileDto.toEntity(): ProfileEntity {
     return ProfileEntity(
         id = id ?: 0,
         name = name ?: "",
-        phone = phone ?: "",
-        profileImage = profileImage ?: "",
-        username = username ?: "",
-        website = website ?: ""
+        phone = phone ?: "Not provided",
+        profileImage = profileImage ?: "https://www.cornwallbusinessawards.co.uk/wp-content/uploads/2017/11/dummy450x450.jpg",
+        username = username ?: "Not provided",
+        website = website ?: "Not provided"
     )
 }
 
