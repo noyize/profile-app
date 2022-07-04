@@ -22,15 +22,18 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.noyize.profileapp.R
+import com.noyize.profileapp.destination.destinations.DetailScreenDestination
 import com.noyize.profileapp.domain.model.Profile
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 @Destination()
 @RootNavGraph(start = true)
 fun ProfileScreen(
-    viewModel: ProfileViewModel = hiltViewModel()
+    viewModel: ProfileViewModel = hiltViewModel(),
+    navigator: DestinationsNavigator
 ) {
     val state = viewModel.state
 
@@ -55,7 +58,10 @@ fun ProfileScreen(
                     ProfileItem(
                         profile = profile, modifier = Modifier
                             .fillMaxWidth()
-                            .animateItemPlacement()
+                            .animateItemPlacement(),
+                        onProfileClick = { id ->
+                            navigator.navigate(DetailScreenDestination(id))
+                        }
                     )
                 }
             }
@@ -68,14 +74,18 @@ fun ProfileScreen(
 @Composable
 fun ProfileItem(
     modifier: Modifier = Modifier,
-    profile: Profile
+    profile: Profile,
+    onProfileClick : (Int) -> Unit
 ) {
     Card(
         modifier = modifier,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
             contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        ),
+        onClick = {
+            onProfileClick(profile.id)
+        }
     ) {
         Row(
             modifier = Modifier
@@ -110,7 +120,7 @@ fun ProfileItem(
 
 @Composable
 fun TextWithIcon(text: String, imageVector: ImageVector, modifier: Modifier = Modifier) {
-    Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(imageVector = imageVector, contentDescription = null)
         Spacer(modifier = Modifier.width(8.dp))
         Text(text = text, style = MaterialTheme.typography.labelLarge)

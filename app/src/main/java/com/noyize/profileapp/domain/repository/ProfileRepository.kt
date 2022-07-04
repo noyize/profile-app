@@ -9,6 +9,6 @@ interface ProfileRepository {
 
     fun getProfiles(): Flow<Resource<List<Profile>>>
 
-    fun getProfileDetail(profileId : Int): Flow<ProfileDetail>
+    fun getProfileDetail(profileId : Int): Flow<ProfileDetail?>
 
 }

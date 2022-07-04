@@ -31,7 +31,7 @@ class ProfileRepositoryImpl @Inject constructor(
             shouldFetch = { isStaleCache() })
     }
 
-    override fun getProfileDetail(profileId: Int): Flow<ProfileDetail> {
+    override fun getProfileDetail(profileId: Int): Flow<ProfileDetail?> {
         return profileDao.getProfileDetails(profileId).map { it.toProfileDetail() }
     }
 
@@ -41,7 +41,14 @@ class ProfileRepositoryImpl @Inject constructor(
     }
 
     private suspend fun saveToLocalDatabase(profiles: List<ProfileDto>) {
-        profileDao.insertAllProfiles(profiles.map { it.toEntity() })
+        profileDao.clearCompanies()
+        profileDao.clearAddresses()
+        val profileEntities = profiles.map { it.toEntity() }
+        val addressEntities  = profiles.map { profile -> profile.addressDto.toEntity(profile.id!!)  }
+        val companyEntities  = profiles.map { profile -> profile.companyDto.toEntity(profile.id!!)  }
+        profileDao.insertAllProfiles(profileEntities)
+        profileDao.insertAllAddress(addressEntities)
+        profileDao.insertAllCompany(companyEntities)
         sharedPreferences.edit().putLong(CACHE_KEY, System.currentTimeMillis()).apply()
     }
 

@@ -4,8 +4,16 @@ import com.noyize.profileapp.data.source.local.entity.AddressEntity
 import com.noyize.profileapp.data.source.remote.dto.AddressDto
 import com.noyize.profileapp.domain.model.Address
 
-fun AddressDto.toEntity(profileId: Int): AddressEntity {
-    return AddressEntity(
+fun AddressDto?.toEntity(profileId: Int): AddressEntity {
+    return if (this == null)  AddressEntity(
+        profileId = profileId,
+        city =  "",
+        street =  "",
+        zipcode = "",
+        lat =  "",
+        lng =  "",
+        suite =  ""
+    ) else AddressEntity(
         profileId = profileId,
         city = city ?: "",
         street = street ?: "",

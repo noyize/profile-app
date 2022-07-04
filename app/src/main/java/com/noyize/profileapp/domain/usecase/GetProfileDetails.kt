@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GetProfileDetails(private val profileRepository: ProfileRepository) {
 
-    operator fun invoke(profileId: Int): Flow<ProfileDetail> {
+    operator fun invoke(profileId: Int): Flow<ProfileDetail?> {
         return profileRepository.getProfileDetail(profileId)
     }
 

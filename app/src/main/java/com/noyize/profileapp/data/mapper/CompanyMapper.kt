@@ -4,13 +4,19 @@ import com.noyize.profileapp.data.source.local.entity.CompanyEntity
 import com.noyize.profileapp.data.source.remote.dto.CompanyDto
 import com.noyize.profileapp.domain.model.Company
 
-fun CompanyDto.toEntity(profileId: Int): CompanyEntity {
-    return CompanyEntity(
+fun CompanyDto?.toEntity(profileId: Int): CompanyEntity {
+    return if (this == null) CompanyEntity(
         profileId = profileId,
-        bs = bs ?: "",
-        catchPhrase = catchPhrase ?: "",
-        name = name ?: ""
-    )
+        bs = "",
+        catchPhrase = "",
+        name = ""
+    ) else
+        CompanyEntity(
+            profileId = profileId,
+            bs = bs ?: "",
+            catchPhrase = catchPhrase ?: "",
+            name = name ?: ""
+        )
 }
 
 fun CompanyEntity.toCompany(): Company {
