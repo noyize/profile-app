@@ -13,9 +13,9 @@ fun CompanyDto?.toEntity(profileId: Int): CompanyEntity {
     ) else
         CompanyEntity(
             profileId = profileId,
-            bs = bs ?: "",
-            catchPhrase = catchPhrase ?: "",
-            name = name ?: ""
+            bs = bs ?: "Not provided",
+            catchPhrase = catchPhrase ?: "Not Provided",
+            name = name ?: "Not provided"
         )
 }
 
